@@ -5,9 +5,9 @@ namespace Server.client
 {
     public class Player : MonoBehaviour
     {
+        public uint tick;
         public int id;
         public string username;
-        public byte[] controls;
         public InputManager inputManager;
 
         [Header("Constants")]
@@ -49,12 +49,12 @@ namespace Server.client
 
         public void Awake()
         {
-            inputManager = new InputManager();
+            inputManager = GetComponent<InputManager>();
             inputManager.HorizontalMovement += ctx =>  horizontalMovementInput = ctx;
-            inputManager.YRotation += ctx => { var currentRotation = transform.localRotation; currentRotation.y = ctx; transform.localRotation = currentRotation; };
             inputManager.Jump += _ => Jump();
             inputManager.Walk += ctx => isWalking = ctx;
             inputManager.Crouch += ctx => isCrouching = ctx;
+            inputManager.tick += ctx => tick = ctx;
             initialPlayerScale = transform.localScale;
             initialSpeed = speed;
             transform.position = new Vector3(0f, 2f, 0f);
@@ -72,6 +72,7 @@ namespace Server.client
 
         public void FixedUpdate()
         {
+            tick++;
             ServerSend.PlayerState(id, this);
         }
 

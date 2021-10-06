@@ -25,5 +25,12 @@ namespace Server
             byte[] inputs = packet.ReadBytes(inputsLength);
             Server.clients[client_id].player.inputManager.RecieveControls(inputs);
         }
+
+        public static void PlayerOrientation(int client_id, Packet packet)
+        {
+            var inputsLength = packet.ReadInt();
+            byte[] orientation = packet.ReadBytes(inputsLength);
+            Server.clients[client_id].player.inputManager.RecieveOrientation(orientation);
+        }
     }
 }

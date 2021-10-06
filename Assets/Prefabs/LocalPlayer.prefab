@@ -44,7 +44,9 @@ GameObject:
   - component: {fileID: 8050145155320814214}
   - component: {fileID: 8050145155320814213}
   - component: {fileID: 8050145155320814209}
+  - component: {fileID: 1673574562820561649}
   - component: {fileID: 166265726692888127}
+  - component: {fileID: 7351852662986670376}
   m_Layer: 0
   m_Name: LocalPlayer
   m_TagString: Untagged
@@ -150,6 +152,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1673574562820561649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050145155320814330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11ff973623c044f85a7e1c9fe55391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &166265726692888127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +179,7 @@ MonoBehaviour:
   id: 0
   username: 
   controls: 
+  inputManager: {fileID: 0}
   controller: {fileID: 8050145155320814209}
   speed: 11
   walkSpeed: 7.5
@@ -181,6 +196,25 @@ MonoBehaviour:
   jumpingForce: {x: 0, y: 0, z: 0}
   jumpingVelocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
+--- !u!114 &7351852662986670376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050145155320814330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11c028300ea5db489edafe710d94f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraHolder: {fileID: 8050145155310859066}
+  camClampXMax: 90
+  camClampXMin: -90
+  MouseSensitivityX: 0
+  MouseSensitivityY: 0
+  InvertMouseX: 0
+  InvertMouseY: 0
 --- !u!1 &8050145155433179619
 GameObject:
   m_ObjectHideFlags: 0

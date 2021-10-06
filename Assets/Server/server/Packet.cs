@@ -17,7 +17,8 @@ public enum ClientPackets
 {
     welcomeReceived = 1,
     playerControls,
-    message
+    message,
+    playerOrientation
 }
 
 public class Packet : IDisposable
@@ -47,7 +48,7 @@ public class Packet : IDisposable
     /// <param name="_data">The bytes to add to the packet.</param>
     public Packet(byte[] _data)
     {
-        buffer = new List<byte>(); // Intitialize buffer
+        buffer = new List<byte>(_data.Length); // Intitialize buffer
         readPos = 0; // Set readPos to 0
 
         SetBytes(_data);

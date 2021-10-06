@@ -135,7 +135,8 @@ namespace Server
             {
                 { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
                 { (int)ClientPackets.message, ServerHandle.MessageReceived },
-                { (int)ClientPackets.playerControls, ServerHandle.PlayerInput }
+                { (int)ClientPackets.playerControls, ServerHandle.PlayerInput },
+                { (int)ClientPackets.playerOrientation, ServerHandle.PlayerOrientation }
             };
         }
     }

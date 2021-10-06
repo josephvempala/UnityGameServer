@@ -94,8 +94,11 @@ namespace Server
             using(Packet packet = new Packet((int)ServerPackets.playerState))
             {
                 packet.Write(player.id);
+                packet.Write(player.tick);
                 packet.Write(player.transform.localPosition);
-                packet.Write(player.transform.rotation);
+                packet.Write(player.transform.localRotation);
+
+                SendUDPPacketToAll(packet);
             }
         }
     }

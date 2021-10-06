@@ -5,19 +5,19 @@ public struct Controls
 {
     public uint tick;
     public Vector2 horizontalMovement;
-    public float Yrotation;
     public bool jump;
     public bool crouch;
     public bool walk;
 
     public void Serialize(ref byte[] controls)
     {
-        Stream stream = new MemoryStream(controls);
+        MemoryStream stream = new MemoryStream(controls);
+        int initialPosition = (int)stream.Position;
         using (BinaryWriter packet = new BinaryWriter(stream))
         {
+            packet.Write(tick);
             packet.Write(horizontalMovement.x);
             packet.Write(horizontalMovement.y);
-            packet.Write(Yrotation);
             packet.Write(jump);
             packet.Write(crouch);
             packet.Write(walk);
@@ -26,12 +26,12 @@ public struct Controls
 
     public void Deserialize(in byte[] controls)
     {
-        Stream stream = new MemoryStream(controls);
+        MemoryStream stream = new MemoryStream(controls);
         using (BinaryReader packet = new BinaryReader(stream))
         {
+            tick = packet.ReadUInt32();
             horizontalMovement.x = packet.ReadSingle();
             horizontalMovement.y = packet.ReadSingle();
-            Yrotation = packet.ReadSingle();
             jump = packet.ReadBoolean();
             crouch = packet.ReadBoolean();
             walk = packet.ReadBoolean();

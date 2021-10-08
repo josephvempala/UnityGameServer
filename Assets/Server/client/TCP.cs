@@ -49,8 +49,11 @@ namespace Server.client
                     int bytes_read = await stream.ReadAsync(receiveBuffer, 0, Constants.MAX_BUFFER_SIZE).ConfigureAwait(false);
                     if (bytes_read == 0)
                     {
-                        Server.clients[id].Disconnect();
-                        continue;
+                        TickManager.ExecuteOnTick(() =>
+                        {
+                            Server.clients[id].Disconnect();
+                        });
+                        return;
                     }
 
                     byte[] data_read = ArrayPool<byte>.Shared.Rent(bytes_read);
@@ -60,7 +63,10 @@ namespace Server.client
             }
             catch (Exception ex)
             {
-                Server.clients[id].Disconnect();
+                TickManager.ExecuteOnTick(() =>
+                {
+                    Server.clients[id].Disconnect();
+                });
                 Debug.Log(ex.Message);
             }
 
@@ -119,6 +125,7 @@ namespace Server.client
             socket.Close();
             stream.Close();
             receivedData.Dispose();
+            cancellationTokenSource.Dispose();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 namespace Server.client
@@ -43,10 +44,17 @@ namespace Server.client
         {
             Tcp.Disconnect();
             Udp.Disconnect();
-            UnityEngine.Object.Destroy(player.gameObject);
+            try
+            {
+                UnityEngine.Object.Destroy(player.gameObject);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.ToString());
+            }
             Debug.Log($"{player.username} has left");
             player = null;
-            Server.clients.Remove(id);
+            Server.clients.TryRemove(id, out Client client);
         }
     }
 }

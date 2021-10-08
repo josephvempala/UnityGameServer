@@ -1,6 +1,7 @@
 ﻿using Server.client;
 using System;
 using System.Buffers;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -14,7 +15,7 @@ namespace Server
     {
         public static int max_clients { get; private set; }
         public static int port { get; private set; }
-        public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
+        public static ConcurrentDictionary<int, Client> clients = new ConcurrentDictionary<int, Client>();
         public delegate void PacketHandler(int client_id, Packet packet);
         public static Dictionary<int, PacketHandler> packetHandlers;
 
@@ -61,7 +62,7 @@ namespace Server
             cancellationTokenSource.Cancel();
             foreach (KeyValuePair<int, Client> client in clients)
             {
-                client.Value.Disconnect();
+                TickManager.ExecuteOnTick(client.Value.Disconnect);
             }
         }
 
@@ -120,7 +121,7 @@ namespace Server
                 {
                     Client client = new Client(i);
                     client.Tcp.Connect(socket);
-                    clients.Add(i, client);
+                    clients.TryAdd(i, client);
                     ServerSend.Welcome(i, "Welcome to the server");
                     return;
                 }

@@ -1,6 +1,5 @@
 {
-  "ErrorExceptions":
-  [
+  "ErrorExceptions": [
     {
       "ValidationTest": "API Validation",
       "PackageVersion": "3.0.6"

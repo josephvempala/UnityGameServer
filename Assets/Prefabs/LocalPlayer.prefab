@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 8050145155320814331}
   - component: {fileID: 8050145155320814215}
   - component: {fileID: 8050145155320814214}
-  - component: {fileID: 8050145155320814213}
   - component: {fileID: 8050145155320814209}
   - component: {fileID: 1673574562820561649}
   - component: {fileID: 166265726692888127}
@@ -62,8 +61,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8050145155320814330}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.433903, y: 4.63, z: -10.794701}
-  m_LocalScale: {x: 1.44, y: 2.25, z: 1.44}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.44, y: 2, z: 1.44}
   m_Children:
   - {fileID: 8050145155433179628}
   - {fileID: 8050145156253986954}
@@ -78,7 +77,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8050145155320814330}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8050145155320814214
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -120,20 +119,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8050145155320814213
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8050145155320814330}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &8050145155320814209
 CharacterController:
   m_ObjectHideFlags: 0
@@ -148,7 +133,7 @@ CharacterController:
   m_Height: 2.0000002
   m_Radius: 0.49999997
   m_SlopeLimit: 45
-  m_StepOffset: 0.1
+  m_StepOffset: 0.7
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -176,9 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc83d526d97f76478e8b9a898767f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tick: 0
   id: 0
   username: 
-  controls: 
   inputManager: {fileID: 0}
   controller: {fileID: 8050145155320814209}
   speed: 11
@@ -209,12 +194,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 8050145155310859066}
-  camClampXMax: 90
-  camClampXMin: -90
-  MouseSensitivityX: 0
-  MouseSensitivityY: 0
-  InvertMouseX: 0
-  InvertMouseY: 0
 --- !u!1 &8050145155433179619
 GameObject:
   m_ObjectHideFlags: 0

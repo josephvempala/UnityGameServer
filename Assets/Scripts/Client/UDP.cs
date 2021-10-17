@@ -1,49 +1,46 @@
 ﻿using System.Buffers;
 using System.Net;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace Server.client
 {
     public class UDP
     {
-        private int id;
-        public EndPoint endPoint;
+        private readonly int _id;
+        public EndPoint EndPoint;
 
         public UDP(int id)
         {
-            this.id = id;
+            this._id = id;
         }
 
         public void Connect(EndPoint endpoint)
         {
-            endPoint = endpoint;
+            EndPoint = endpoint;
         }
 
         public async Task SendAsync(Packet packet)
         {
-            await Server.SendUDPDataAsync(endPoint, packet).ConfigureAwait(false);
+            await Server.SendUdpDataAsync(EndPoint, packet).ConfigureAwait(false);
         }
 
         public void HandleData(byte[] data)
         {
-            Packet packet = new Packet(data);
-            int clientId = packet.ReadInt();
-            int packetId = packet.ReadInt();
-            if (Server.packetHandlers.ContainsKey(packetId))
-            {
+            var packet = new Packet(data);
+            var clientId = packet.ReadInt();
+            var packetId = packet.ReadInt();
+            if (Server.PacketHandlers.ContainsKey(packetId))
                 TickManager.ExecuteOnTick(() =>
                 {
-                    Server.packetHandlers[packetId].Invoke(id, packet);
+                    Server.PacketHandlers[packetId].Invoke(_id, packet);
                     ArrayPool<byte>.Shared.Return(data);
                     packet.Dispose();
                 });
-            }
         }
 
         public void Disconnect()
         {
-            endPoint = null;
+            EndPoint = null;
         }
     }
 }
